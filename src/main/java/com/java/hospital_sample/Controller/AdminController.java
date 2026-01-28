@@ -117,8 +117,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.java.hospital_sample.Repositary.AppointmentRepository;
 import com.java.hospital_sample.Repositary.DoctorRepository;
 import com.java.hospital_sample.Repositary.UserRepositary;
+import com.java.hospital_sample.user.Appointment;
 import com.java.hospital_sample.user.Doctor;
 import com.java.hospital_sample.user.User;
 @CrossOrigin(origins = "*")
@@ -127,6 +130,8 @@ import com.java.hospital_sample.user.User;
 public class AdminController {
     @Autowired
     public UserRepositary person;
+    @Autowired
+    public AppointmentRepository appoinment;
     @GetMapping("/users")
     public List<User> getAllDetails() {
         return person.findAll();
@@ -167,6 +172,10 @@ public ResponseEntity<User> getPatientById(@PathVariable Long id) {
     @GetMapping("/doctor")
     public List<Doctor> getAllDoctors() {
         return doctorService.findAll();
+    }
+    @GetMapping("/appoinmtment")
+    public List<Appointment> getAllAppointments(){
+    	return appoinment.findAll();
     }
     @GetMapping("/doctor/{docid}")
     public ResponseEntity<Doctor> getDoctorById(@PathVariable Long id) {
